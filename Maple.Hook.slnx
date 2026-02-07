@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Maple.Hook.Abstractions/Maple.Hook.Abstractions.csproj" />
+  <Project Path="Maple.Hook.Imp.MinHook/Maple.Hook.Imp.MinHook.csproj" />
+  <Project Path="Maple.Hook/Maple.Hook.csproj" />
+</Solution>

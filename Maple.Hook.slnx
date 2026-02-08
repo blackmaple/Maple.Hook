@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="Maple.Hook.Abstractions/Maple.Hook.Abstractions.csproj" />
+  <Project Path="Maple.Hook.Imp.Dobby/Maple.Hook.Imp.Dobby.csproj" Id="e91d1ae8-154a-4db3-8be3-eed8bd6c01ea" />
   <Project Path="Maple.Hook.Imp.MinHook/Maple.Hook.Imp.MinHook.csproj" />
   <Project Path="Maple.Hook/Maple.Hook.csproj" />
 </Solution>

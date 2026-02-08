@@ -14,7 +14,7 @@ namespace Maple.Hook.Imp.MinHook
         }
 
         // 我们直接链接 MinHook 静态库，所以使用 "__Internal"
-        private const string LibraryName = "libMinHook.x64";
+        private const string LibraryName = "libMinHook";
 
         /// <summary>
         /// 初始化 MinHook

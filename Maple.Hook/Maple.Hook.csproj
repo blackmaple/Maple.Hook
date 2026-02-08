@@ -39,22 +39,24 @@
 		<StartupHookSupport>false</StartupHookSupport>
 		
 	</PropertyGroup>
+	<!--<Import Project="C:\Users\Black\source\repos\blackmaple\Maple.Hook\Maple.Hook.Imp.MinHook\build\Maple.Hook.Imp.MinHook.targets" />-->
 
 	<ItemGroup>
+		<PackageReference Include="Maple.Hook.Imp.MinHook" Version="0.0.8-rc" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.2" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Maple.Hook.Abstractions\Maple.Hook.Abstractions.csproj" />
-		<ProjectReference Include="..\Maple.Hook.Imp.MinHook\Maple.Hook.Imp.MinHook.csproj" />
+	  <ProjectReference Include="..\Maple.Hook.Imp.Dobby\Maple.Hook.Imp.Dobby.csproj" />
 	</ItemGroup>
 
 
-	<ItemGroup>
+	<!--<ItemGroup>
 		<LinkerArg Include="/LTCG"/>
 		<LinkerArg Include="/MAP"/>
 
-		<DirectPInvoke Include="libMinHook.x64" />
-		<NativeLibrary Include="libMinHook.x64.lib"   />
-	</ItemGroup>
+		<DirectPInvoke Include="libMinHook"  />
+	 
+		<NativeLibrary Include="C:\Users\Black\source\repos\blackmaple\Maple.Hook\Maple.Hook.Imp.MinHook\runtimes\win-x64\libMinHook.x64.lib"   />
+	</ItemGroup>-->
 </Project>

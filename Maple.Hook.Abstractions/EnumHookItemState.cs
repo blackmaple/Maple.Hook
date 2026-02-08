@@ -1,6 +1,6 @@
-﻿namespace Maple.Hook.Imp.MinHook
+﻿namespace Maple.Hook.Abstractions
 {
-    internal enum EnumMinHookItemState
+    public enum EnumHookItemState
     {
        // Created,
         Enabled,

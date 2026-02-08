@@ -1,8 +1,6 @@
 ﻿using Maple.Hook.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Maple.Hook.Imp.MinHook
 {
@@ -10,8 +8,11 @@ namespace Maple.Hook.Imp.MinHook
     {
         public static IServiceCollection AddMinHookFactory(this IServiceCollection services)
         {
-            services.AddSingleton<IHookFactory, MinHookFactory>();
+            services.TryAddSingleton<IHookFactory, MinHookFactory>();
             return services;
         }
+
+
+ 
     }
 }

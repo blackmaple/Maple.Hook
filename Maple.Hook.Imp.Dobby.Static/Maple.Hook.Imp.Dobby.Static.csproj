@@ -14,7 +14,7 @@
 	  <Description>dotNet Maple.Hook.Imp.Dobby.Static</Description>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
 	  <PackageTags>Dobby;hook;c#;dotnet;AOT</PackageTags>
-	  <Version>0.0.1-rc</Version>
+	  <Version>0.1.0-rc</Version>
   </PropertyGroup>
 
   <ItemGroup>

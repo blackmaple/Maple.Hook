@@ -40,15 +40,13 @@
 		
 	</PropertyGroup>
 	<!--<Import Project="C:\Users\Black\source\repos\blackmaple\Maple.Hook\Maple.Hook.Imp.MinHook\build\Maple.Hook.Imp.MinHook.targets" />-->
-	<Import Project="C:\Users\NBNN_IT_CODE\source\repos\Maple.Hook\Maple.Hook.Imp.Dobby.Static\build\Maple.Hook.Imp.Dobby.Static.targets" />
+	<!--<Import Project="C:\Users\NBNN_IT_CODE\source\repos\Maple.Hook\Maple.Hook.Imp.Dobby.Static\build\Maple.Hook.Imp.Dobby.Static.targets" />-->
 
 	<ItemGroup>
+		<PackageReference Include="Maple.Hook.Imp.Dobby.Static" Version="0.1.0-rc" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.2" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\Maple.Hook.Imp.Dobby.Static\Maple.Hook.Imp.Dobby.Static.csproj" />
-	</ItemGroup>
+ 
 
 
 	<!--<ItemGroup>

@@ -30,7 +30,7 @@
 
 		<ItemGroup Condition="Exists('$(_NativeStaticLibs)')">
 			<None Include="$(_NativeStaticLibs)">
-				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+				<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 			</None>
 		</ItemGroup>
 		<Message Importance="high" Text="COPY $(_NativeLibraryRuntimeIdentifier)=>$(_NativeStaticLibs)" />

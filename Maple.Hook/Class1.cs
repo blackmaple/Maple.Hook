@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 
 var services = new ServiceCollection();
 
-//services.AddMinHookFactory();
-services.AddDobbyHookNativeFactory();
+services.AddDobbyHookNativeFactory( );
+//services.AddDobbyHookNativeFactory();
 
 var app = services.BuildServiceProvider();
 

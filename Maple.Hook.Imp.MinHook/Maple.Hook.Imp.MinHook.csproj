@@ -14,7 +14,7 @@
 		<Description>dotNet Maple.Hook.Imp.MinHook</Description>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageTags>MinHook;hook;c#;dotnet;AOT</PackageTags>
-		<Version>0.0.8-rc</Version>
+		<Version>0.1.0-rc</Version>
 
 	</PropertyGroup>
 

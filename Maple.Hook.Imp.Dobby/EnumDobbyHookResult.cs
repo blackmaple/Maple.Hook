@@ -1,6 +1,6 @@
 ﻿namespace Maple.Hook.Imp.Dobby
 {
-    enum EnumDobbyHookResult
+    public enum EnumDobbyHookResult
     {
         /// <summary>
         /// Hook 成功

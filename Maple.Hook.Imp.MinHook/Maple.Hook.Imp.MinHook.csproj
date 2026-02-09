@@ -8,7 +8,7 @@
 
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>Maple.Hook.Imp.MinHook</Title>
-		<RepositoryUrl>https://github.com/blackmaple/Maple.MonoGameAssistant</RepositoryUrl>
+		<RepositoryUrl>https://github.com/blackmaple/Maple.Hook</RepositoryUrl>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
 		<Description>dotNet Maple.Hook.Imp.MinHook</Description>

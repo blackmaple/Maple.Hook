@@ -1,8 +1,7 @@
 ﻿
 
 using Maple.Hook.Abstractions;
-using Maple.Hook.Imp.Dobby;
-using Maple.Hook.Imp.MinHook;
+using Maple.Hook.Imp.Dobby.Static;
 using Microsoft.Extensions.DependencyInjection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -11,7 +10,7 @@ using System.Runtime.InteropServices;
 var services = new ServiceCollection();
 
 //services.AddMinHookFactory();
-services.AddDobbyHookFactory("dobby_x64.dll");
+services.AddDobbyHookNativeFactory();
 
 var app = services.BuildServiceProvider();
 
@@ -32,7 +31,8 @@ unsafe
 
     hookItem.Disable();
     Console.WriteLine($"sum=>{Test_Sum.MethodPointer_Sum.Delegate(1, 2)}");
-
+    hookItem.Enable();
+    Console.WriteLine($"sum=>{Test_Sum.MethodPointer_Sum.Delegate(1, 2)}");
 
 }
 

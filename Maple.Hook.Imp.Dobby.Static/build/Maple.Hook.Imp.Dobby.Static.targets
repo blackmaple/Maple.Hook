@@ -1,0 +1,40 @@
+<Project>
+	<PropertyGroup>
+		<_NativeLibraryAotEnabled Condition="'$(PublishAot)' == 'true'">true</_NativeLibraryAotEnabled>
+		<_NativeLibraryRuntimeIdentifier>$(RuntimeIdentifier)</_NativeLibraryRuntimeIdentifier>
+		<_MSBuildThisFileDirectory>$(MSBuildThisFileDirectory)</_MSBuildThisFileDirectory>
+		<!--<_MSBuildThisFileDirectory>C:\Users\NBNN_IT_CODE\source\repos\Maple.Hook\Maple.Hook.Imp.Dobby.Static\build\</_MSBuildThisFileDirectory>-->
+		<_DirectPInvoke>dobby</_DirectPInvoke>
+		<_Extension>.lib</_Extension>
+
+		<_NativeLibraryRuntimeIdentifier Condition="'$(_NativeLibraryRuntimeIdentifier)' == ''">$(NETCoreSdkRuntimeIdentifier)</_NativeLibraryRuntimeIdentifier>
+	</PropertyGroup>
+
+	<Target Name="SetupNativeLibraryForAot" BeforeTargets="ComputeIlcCompileInputs" Condition="'$(_NativeLibraryAotEnabled)' == 'true'">
+		<!--<Message Importance="high" Text="_MSBuildThisFileDirectory:$(_MSBuildThisFileDirectory) " />-->
+
+		<PropertyGroup>
+			<_NativeLibPath>$(_MSBuildThisFileDirectory)runtimes\$(_NativeLibraryRuntimeIdentifier)\</_NativeLibPath>
+		</PropertyGroup>
+		<!--<Message Importance="high" Text="_NativeLibPath:$(_NativeLibPath) " />-->
+		<Error Condition="!Exists('$(_NativeLibPath)')" Text="NOT FOUND: $(_NativeLibraryRuntimeIdentifier)=>$(_NativeLibPath)" />
+
+
+		<PropertyGroup Condition="Exists('$(_NativeLibPath)')">
+			<_NativeStaticLibs>$(_NativeLibPath)$(_DirectPInvoke)$(_Extension)</_NativeStaticLibs>
+		</PropertyGroup>
+		
+		
+		<!--<Message Importance="high" Text="ItemGroup _NativeStaticLibs:$(_NativeStaticLibs) " />-->
+		<Error Condition="!Exists('$(_NativeStaticLibs)')" Text="NOT FOUND: $(_NativeLibraryRuntimeIdentifier)=>$(_NativeStaticLibs)" />
+		
+		<ItemGroup Condition="Exists('$(_NativeStaticLibs)')">
+			<DirectPInvoke Include="$(_DirectPInvoke)" />
+			<NativeLibrary Include="$(_NativeStaticLibs)"/>
+		</ItemGroup>
+		<Message Importance="high" Text="AOT $(_NativeLibraryRuntimeIdentifier)=>$(_NativeStaticLibs)" />
+
+
+
+	</Target>
+</Project>

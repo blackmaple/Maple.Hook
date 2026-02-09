@@ -6,9 +6,10 @@ namespace Maple.Hook.Imp.Dobby
 {
     public static class DobbyHookExtensions
     {
-        public static IServiceCollection AddDobbyHookFactory(this IServiceCollection services, string dll)
+        public static IServiceCollection AddDobbyHookFactory(this IServiceCollection services,Func<IServiceProvider, IDobbyHookRuntime> runtimeFactory)
         {
-            services.TryAddSingleton<IHookFactory>(p => DobbyHookFactory.Create(dll));
+            services.TryAddSingleton(p => runtimeFactory(p));
+            services.TryAddSingleton<IHookFactory, DobbyHookFactory>();
             return services;
         }
 

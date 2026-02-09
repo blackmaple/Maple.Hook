@@ -7,15 +7,22 @@
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Title>Maple.Hook.Imp.Dobby</Title>
+		<Title>Maple.Hook.Imp.Dobby.Dynamic</Title>
 		<RepositoryUrl>https://github.com/blackmaple/Maple.Hook</RepositoryUrl>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-		<Description>dotNet Maple.Hook.Imp.Dobby</Description>
+		<Description>dotNet Maple.Hook.Imp.Dobby.Dynamic</Description>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageTags>Dobby;hook;c#;dotnet;AOT</PackageTags>
 		<Version>0.0.1-rc</Version>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="build\*.targets" Pack="true" PackagePath="build\" />
+		<None Include="build\runtimes\win-x64\*.dll" Pack="true" PackagePath="build\runtimes\win-x64\" />
+		<None Include="build\runtimes\win-x86\*.dll" Pack="true" PackagePath="build\runtimes\win-x86\" />
+	</ItemGroup>
+	
 	
 	<ItemGroup>
 		<None Include="..\LICENSE" Link="LICENSE">
@@ -27,13 +34,13 @@
 			<Pack>True</Pack>
 		</None>
 	</ItemGroup>
-	
+
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.2" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Maple.Hook.Abstractions\Maple.Hook.Abstractions.csproj" />
+		<ProjectReference Include="..\Maple.Hook.Imp.Dobby\Maple.Hook.Imp.Dobby.csproj" />
 	</ItemGroup>
 
 </Project>

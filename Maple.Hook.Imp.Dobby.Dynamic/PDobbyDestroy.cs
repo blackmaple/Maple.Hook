@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Maple.Hook.Imp.Dobby
+namespace Maple.Hook.Imp.Dobby.Dynamic
 {
     [StructLayout(LayoutKind.Sequential)]
     readonly unsafe struct PDobbyDestroy(nint ptr)
@@ -16,6 +16,4 @@ namespace Maple.Hook.Imp.Dobby
         public static implicit operator PDobbyDestroy(nint ptr) => new(ptr);
 
     }
-
-
 }

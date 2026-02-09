@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <Title>Maple.Hook.Imp.Dobby.Static</Title>
+	  <RepositoryUrl>https://github.com/blackmaple/Maple.Hook</RepositoryUrl>
+	  <PackageLicenseFile>LICENSE</PackageLicenseFile>
+	  <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+	  <Description>dotNet Maple.Hook.Imp.Dobby.Static</Description>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>
+	  <PackageTags>Dobby;hook;c#;dotnet;AOT</PackageTags>
+	  <Version>0.0.1-rc</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Maple.Hook.Imp.Dobby\Maple.Hook.Imp.Dobby.csproj" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<None Include="build\*.targets" Pack="true" PackagePath="build\" />
+		<None Include="build\runtimes\win-x64\*.lib" Pack="true" PackagePath="build\runtimes\win-x64\" />
+		<None Include="build\runtimes\win-x86\*.lib" Pack="true" PackagePath="build\runtimes\win-x86\" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="..\LICENSE" Link="LICENSE">
+			<PackagePath>\</PackagePath>
+			<Pack>True</Pack>
+		</None>
+		<None Include="..\README.md" Link="README.md">
+			<PackagePath>\</PackagePath>
+			<Pack>True</Pack>
+		</None>
+	</ItemGroup>
+</Project>

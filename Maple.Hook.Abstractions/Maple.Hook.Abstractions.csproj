@@ -27,4 +27,7 @@
 			<Pack>True</Pack>
 		</None>
 	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="Maple.UnmanagedExtensions" Version="0.0.4-rc" />
+	</ItemGroup>
 </Project>

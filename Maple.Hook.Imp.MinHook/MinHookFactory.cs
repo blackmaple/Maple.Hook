@@ -1,4 +1,5 @@
 ﻿using Maple.Hook.Abstractions;
+using Maple.UnmanagedExtensions;
 using System.Collections.Concurrent;
 using MH_STATUS = Maple.Hook.Imp.MinHook.EnumMinHookStatus;
 namespace Maple.Hook.Imp.MinHook
@@ -16,7 +17,7 @@ namespace Maple.Hook.Imp.MinHook
             {
                 return hookItem;
             }
-            var status = MinHookNativeMethods.MH_CreateHook(pTarget, pDetour, HookUnsafeOut<nint>.FromOut(out nint pOriginal));
+            var status = MinHookNativeMethods.MH_CreateHook(pTarget, pDetour, UnsafeOut<nint>.FromOut(out nint pOriginal));
             if (status != MH_STATUS.MH_OK)
             {
                 return HookException.Throw<THookItem>($"MinHook Error:{MinHookNativeMethods.MH_StatusToString(status)}");

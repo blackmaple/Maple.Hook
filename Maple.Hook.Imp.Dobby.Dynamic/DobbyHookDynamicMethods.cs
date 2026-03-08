@@ -1,4 +1,5 @@
 ﻿using Maple.Hook.Abstractions;
+using Maple.UnmanagedExtensions;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -22,7 +23,7 @@ namespace Maple.Hook.Imp.Dobby.Dynamic
         public EnumDobbyHookResult DobbyCommit(nint address) => Ptr_DobbyCommit.Delegate(address);
         public EnumDobbyHookResult DobbyDestroy(nint address) => Ptr_DobbyDestroy.Delegate(address);
         public EnumDobbyHookResult DobbyPrepare(nint address, nint replace_func, out nint porigin_func)
-            => Ptr_DobbyPrepare.Delegate(address, replace_func, HookUnsafeOut<nint>.FromOut(out porigin_func));
+            => Ptr_DobbyPrepare.Delegate(address, replace_func, UnsafeOut<nint>.FromOut(out porigin_func));
 
 
 

@@ -1,15 +1,16 @@
 ﻿
 
 using Maple.Hook.Abstractions;
-using Maple.Hook.Imp.Dobby.Static;
+using Maple.Hook.Imp.Dobby.Dynamic;
 using Microsoft.Extensions.DependencyInjection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using static Test_Sum;
 
 
 var services = new ServiceCollection();
 
-services.AddDobbyHookNativeFactory( );
+services.AddDobbyHookDynamicFactory("C:\\Users\\NBNN_IT_CODE\\source\\repos\\Maple.Hook\\Maple.Hook.Imp.Dobby.Dynamic\\build\\runtimes\\win-x64\\dobby.dll");
 //services.AddDobbyHookNativeFactory();
 
 var app = services.BuildServiceProvider();
@@ -22,8 +23,8 @@ unsafe
     //delegate* unmanaged[Stdcall]<int, int, int> sumPtr = &Test_Sum.Sum;
     //delegate* unmanaged[Stdcall]<int, int, int> hook_sumPtr = &Test_Sum.Hook_Sum;
     Console.WriteLine($"sum=>{Test_Sum.MethodPointer_Sum.Delegate(1, 2)}");
-
-    using var hookItem = factory.Create<Test_Sum>("sum", Test_Sum.MethodPointer_Sum, Test_Sum.MethodPointer_HookSum);
+    delegate* unmanaged[Stdcall]<int, int, int> hook_ptr = &Test_Sum.Hook_Sum;
+    using var hookItem = factory.Create<Test_Sum, Ptr_Sum, Ptr_Sum>(new Test_Sum.Ptr_Sum(), new Test_Sum.Ptr_Sum(new(hook_ptr)));
 
     Console.WriteLine($"sum=>{Test_Sum.MethodPointer_Sum.Delegate(1, 2)}");
     hookItem.Enable();
@@ -39,13 +40,13 @@ unsafe
 Console.Read();
 
 
-class Test_Sum : HookItem<Test_Sum.Ptr_Sum, Test_Sum.Ptr_HookSum>
+class Test_Sum : HookItem<Test_Sum.Ptr_Sum, Test_Sum.Ptr_Sum>
 {
     [StructLayout(LayoutKind.Sequential)]
-    public readonly unsafe struct Ptr_Sum() : IHookMethod
+    public readonly unsafe struct Ptr_Sum(nint ptr) : IHookMethod
     {
       //  [MarshalAs(UnmanagedType.SysInt)]
-        readonly delegate* unmanaged[Stdcall]<int, int, int> m_Pointer = &Sum;
+        readonly delegate* unmanaged[Stdcall]<int, int, int> m_Pointer = (delegate* unmanaged[Stdcall]<int, int, int>)ptr;
 
         public nint PtrMethod => (nint)m_Pointer;
 

@@ -44,7 +44,7 @@ class Test_Sum : HookItem<Test_Sum.Ptr_Sum, Test_Sum.Ptr_HookSum>
     [StructLayout(LayoutKind.Sequential)]
     public readonly unsafe struct Ptr_Sum() : IHookMethod
     {
-        [MarshalAs(UnmanagedType.SysInt)]
+      //  [MarshalAs(UnmanagedType.SysInt)]
         readonly delegate* unmanaged[Stdcall]<int, int, int> m_Pointer = &Sum;
 
         public nint PtrMethod => (nint)m_Pointer;
@@ -57,7 +57,7 @@ class Test_Sum : HookItem<Test_Sum.Ptr_Sum, Test_Sum.Ptr_HookSum>
     [StructLayout(LayoutKind.Sequential)]
     public readonly unsafe struct Ptr_HookSum() : IHookMethod
     {
-        [MarshalAs(UnmanagedType.SysInt)]
+      //  [MarshalAs(UnmanagedType.SysInt)]
         readonly delegate* unmanaged[Stdcall]<int, int, int> m_Pointer = &Hook_Sum;
 
         public nint PtrMethod => (nint)m_Pointer;

@@ -22,13 +22,19 @@ namespace Maple.Hook.Abstractions
         }
         static bool TryAdd(string key, HookItem hookItem) => Hooks.TryAdd(key, hookItem);
         static bool TryRemove(string key) => Hooks.TryRemove(key, out _);
-
+        THookItem Create<THookItem>(nint pTarget, nint pDetour) where THookItem : HookItem, new()
+            => Create<THookItem>(typeof(THookItem).Name, pTarget, pDetour);
         THookItem Create<THookItem>(string key, nint pTarget, nint pDetour) where THookItem : HookItem, new();
         public THookItem Create<THookItem, TTargetMethod, TDetourMethod>(string key, TTargetMethod pTarget, TDetourMethod pDetour)
             where THookItem : HookItem, new()
             where TTargetMethod : IHookMethod
             where TDetourMethod : IHookMethod
          => Create<THookItem>(key, pTarget.PtrMethod, pDetour.PtrMethod);
+        public THookItem Create<THookItem, TTargetMethod, TDetourMethod>(TTargetMethod pTarget, TDetourMethod pDetour)
+            where THookItem : HookItem, new()
+            where TTargetMethod : IHookMethod
+            where TDetourMethod : IHookMethod
+         => Create<THookItem>(typeof(THookItem).Name, pTarget.PtrMethod, pDetour.PtrMethod);
 
         public bool Enable<THookItem>(string key) where THookItem : HookItem
         {
@@ -52,7 +58,7 @@ namespace Maple.Hook.Abstractions
             {
                 return HookException.Throw<bool>($"NOT FOUND:{key}");
             }
-            return this.Remove(hookItem) ;
+            return this.Remove(hookItem);
         }
         bool Enable<THookItem>(THookItem hookItem) where THookItem : HookItem;
         bool Disable<THookItem>(THookItem hookItem) where THookItem : HookItem;

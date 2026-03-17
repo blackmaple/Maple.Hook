@@ -1,4 +1,5 @@
 ﻿using Maple.Hook.Abstractions;
+using System.Net.NetworkInformation;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -25,18 +26,18 @@ namespace Maple.Hook.Imp.Dobby
             {
                 return hookItem;
             }
-            var status = this.Runtime.DobbyPrepare(pTarget, pDetour, out nint pOriginal);
-            if (status != EnumDobbyHookResult.Success)
-            {
-                return HookException.Throw<THookItem>($"DobbyHook Error:{status}");
-            }
+            //var status = this.Runtime.DobbyPrepare(pTarget, pDetour, out nint pOriginal);
+            //if (status != EnumDobbyHookResult.Success)
+            //{
+            //    return HookException.Throw<THookItem>($"DobbyHook Error:{status}");
+            //}
             hookItem = new THookItem()
             {
                 Factory = this,
                 Key = key,
                 TargetPointer = pTarget,
                 DetourPointer = pDetour,
-                OriginalPointer = pOriginal,
+                OriginalPointer = default,
                 State = EnumHookItemState.Disabled,
 
             };
@@ -49,7 +50,22 @@ namespace Maple.Hook.Imp.Dobby
 
         public bool Disable<THookItem>(THookItem hookItem) where THookItem : HookItem
         {
-            return this.Remove(hookItem);
+            if (hookItem.State == EnumHookItemState.Disabled)
+            {
+                return true;
+            }
+            if (hookItem.State == EnumHookItemState.Removed)
+            {
+                return HookException.Throw<bool>(hookItem.State);
+            }
+          
+            var status = this.Runtime.DobbyDestroy(hookItem.TargetPointer);
+            if (status == EnumDobbyHookResult.Success)
+            {
+                hookItem.State = EnumHookItemState.Disabled;
+                return true;
+            }
+            return HookException.Throw<bool>($"DobbyHook Error:{status}");
         }
 
         public void Dispose()
@@ -60,12 +76,26 @@ namespace Maple.Hook.Imp.Dobby
 
         public bool Enable<THookItem>(THookItem hookItem) where THookItem : HookItem
         {
+            if (hookItem.State == EnumHookItemState.Enabled)
+            {
+                return true;
+            }
             if (hookItem.State == EnumHookItemState.Removed)
             {
                 return HookException.Throw<bool>(hookItem.State);
             }
-            var status = this.Runtime.DobbyCommit(hookItem.TargetPointer);
-            if (status == EnumDobbyHookResult.Success)
+            EnumDobbyHookResult status;
+            if (hookItem.State == EnumHookItemState.Disabled)
+            {
+                status = this.Runtime.DobbyPrepare(hookItem.TargetPointer, hookItem.DetourPointer, out nint pOriginal);
+                if (status != EnumDobbyHookResult.Success)
+                {
+                    return HookException.Throw<bool>($"DobbyHook Error:{status}");
+                }
+                hookItem.OriginalPointer = pOriginal;
+            }
+            status = this.Runtime.DobbyCommit(hookItem.TargetPointer);
+            if (status == EnumDobbyHookResult.Success )
             {
                 hookItem.State = EnumHookItemState.Enabled;
                 return true;
@@ -78,6 +108,12 @@ namespace Maple.Hook.Imp.Dobby
         {
             if (hookItem.State == EnumHookItemState.Removed)
             {
+                return true;
+            }
+            if (hookItem.State == EnumHookItemState.Disabled)
+            {
+                hookItem.State = EnumHookItemState.Removed;
+                IHookFactory.TryRemove(hookItem.Key);
                 return true;
             }
             var status = this.Runtime.DobbyDestroy(hookItem.TargetPointer);

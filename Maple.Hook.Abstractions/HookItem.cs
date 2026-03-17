@@ -21,7 +21,7 @@ namespace Maple.Hook.Abstractions
         /// <summary>
         /// 可调用的原函数地址
         /// </summary>
-        public nint OriginalPointer { get; init; }
+        public nint OriginalPointer { get; set; }
         /// <summary>
         /// Hook的函数地址
         /// </summary>
@@ -75,4 +75,20 @@ namespace Maple.Hook.Abstractions
             }
         }
     }
+
+
+
+    public abstract class HookItem<THookItem, TTargetMethod, TDetourMethod>
+        : HookItem<TTargetMethod, TDetourMethod>
+        where THookItem : HookItem<TTargetMethod, TDetourMethod>
+        where TTargetMethod : unmanaged, IHookMethod
+        where TDetourMethod : unmanaged, IHookMethod
+    {
+        public static bool TryGet(string key, [MaybeNullWhen(false)] out THookItem hookItem)
+            => IHookFactory.TryGet(key, out hookItem);
+        public static bool TryGet([MaybeNullWhen(false)] out THookItem hookItem)
+            => TryGet(typeof(THookItem).Name, out hookItem);
+
+    }
+
 }

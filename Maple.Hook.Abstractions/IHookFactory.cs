@@ -20,6 +20,9 @@ namespace Maple.Hook.Abstractions
             return false;
 
         }
+        static bool TryGet<T>([MaybeNullWhen(false)] out T hookItem) where T : HookItem
+            => TryGet<T>(typeof(T).Name, out hookItem);
+
         static bool TryAdd(string key, HookItem hookItem) => Hooks.TryAdd(key, hookItem);
         static bool TryRemove(string key) => Hooks.TryRemove(key, out _);
         THookItem Create<THookItem>(nint pTarget, nint pDetour) where THookItem : HookItem, new()

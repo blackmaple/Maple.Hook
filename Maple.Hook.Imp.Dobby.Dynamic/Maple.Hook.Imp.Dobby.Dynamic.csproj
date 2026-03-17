@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net10.0</TargetFramework>
+		<TargetFramework>net10.0-windows</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -14,7 +14,7 @@
 		<Description>dotNet Maple.Hook.Imp.Dobby.Dynamic</Description>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageTags>Dobby;hook;c#;dotnet;AOT</PackageTags>
-		<Version>0.1.0-rc</Version>
+		<Version>0.26.0317.01-rc</Version>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using Maple.UnmanagedExtensions;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 namespace Maple.Hook.Abstractions
@@ -7,39 +8,9 @@ namespace Maple.Hook.Abstractions
 
     public abstract class HookItem : IDisposable
     {
-        Dictionary<string, WeakReference<object>> AdditionalContent { get; } = [];
+        public AdditionalContentManager AdditionalContent { get; } = new();
 
-        public void SetAdditionalContent(string key, object content)
-        {
-            this.AdditionalContent[key] = new WeakReference<object>(content);
-        }
-        public void SetAdditionalContent<T>(string key, T content) where T : class
-        {
-            this.AdditionalContent[key] = new WeakReference<object>(content);
-        }
-        public bool TryGetAdditionalContent(string key, [MaybeNullWhen(false)] out object content)
-        {
-            Unsafe.SkipInit(out content);
-            return this.AdditionalContent.TryGetValue(key, out var weakReference) && weakReference.TryGetTarget(out content);
-        }
-        public bool TryGetAdditionalContent<T>(string key, [MaybeNullWhen(false)] out T content) where T : class
-        {
-            Unsafe.SkipInit(out content);
-            if (TryGetAdditionalContent(key, out var weakReference))
-            {
-                if (weakReference is T weakReference2)
-                {
-                    content = weakReference2;
-                    return true;
-                }
-            }
-            return false;
-        }
-        private bool ClearAdditionalContent()
-        {
-            this.AdditionalContent.Clear();
-            return true;
-        }
+
 
         [NotNull]
         public IHookFactory? Factory { get; init; }
@@ -67,7 +38,11 @@ namespace Maple.Hook.Abstractions
         public virtual bool Enable() => this.Factory.Enable(this);
         public virtual bool Disable() => this.Factory.Disable(this);
         public virtual bool Remove() => this.Factory.Remove(this);
-        public virtual bool Clear() => this.ClearAdditionalContent() && this.Factory.Disable(this) && this.Factory.Remove(this);
+        public virtual bool Clear()
+        {
+            this.AdditionalContent.Clear();
+            return this.Factory.Disable(this) && this.Factory.Remove(this);
+        }
 
         public void Dispose()
         {

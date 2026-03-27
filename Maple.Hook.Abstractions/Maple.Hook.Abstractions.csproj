@@ -14,7 +14,7 @@
 		<Description>dotNet Hook.Abstractions</Description>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageTags>hook;c#;dotnet;AOT</PackageTags>
-		<Version>0.26.0327.01-rc</Version>
+		<Version>0.26.0327.02-rc</Version>
 
 	</PropertyGroup>
 	<ItemGroup>
@@ -28,6 +28,6 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="Maple.UnmanagedExtensions" Version="0.26.316.1-rc" />
+	  <PackageReference Include="Maple.UnmanagedExtensions" Version="0.26.327.5-rc" />
 	</ItemGroup>
 </Project>

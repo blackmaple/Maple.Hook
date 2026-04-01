@@ -1,0 +1,4 @@
+<Project>
+	<Import Project="$(MSBuildThisFileDirectory)..\build\Maple.Hook.Imp.Dobby.Dynamic.targets.impl"
+			Condition="Exists('$(MSBuildThisFileDirectory)..\build\Maple.Hook.Imp.Dobby.Dynamic.targets.impl') and '$(MapleHookImpDobbyDynamicTargetsImported)' != 'true'" />
+</Project>

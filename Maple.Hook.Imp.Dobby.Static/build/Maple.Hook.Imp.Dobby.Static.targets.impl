@@ -1,0 +1,35 @@
+<Project>
+	<PropertyGroup>
+		<MapleHookImpDobbyStaticTargetsImported>true</MapleHookImpDobbyStaticTargetsImported>
+     <MapleHookImpDobbyStaticAotEnabled Condition="'$(PublishAot)' == 'true'">true</MapleHookImpDobbyStaticAotEnabled>
+		<MapleHookImpDobbyStaticRuntimeIdentifier>$(RuntimeIdentifier)</MapleHookImpDobbyStaticRuntimeIdentifier>
+		<MapleHookImpDobbyStaticBuildDirectory>$(MSBuildThisFileDirectory)</MapleHookImpDobbyStaticBuildDirectory>
+		<!--<MapleHookImpDobbyStaticBuildDirectory>C:\Users\NBNN_IT_CODE\source\repos\Maple.Hook\Maple.Hook.Imp.Dobby.Static\build\</MapleHookImpDobbyStaticBuildDirectory>-->
+		<MapleHookImpDobbyStaticNativeLibraryName>dobby</MapleHookImpDobbyStaticNativeLibraryName>
+		<MapleHookImpDobbyStaticNativeLibraryExtension>.lib</MapleHookImpDobbyStaticNativeLibraryExtension>
+		<MapleHookImpDobbyStaticRuntimeIdentifier Condition="'$(MapleHookImpDobbyStaticRuntimeIdentifier)' == ''">$(NETCoreSdkRuntimeIdentifier)</MapleHookImpDobbyStaticRuntimeIdentifier>
+	</PropertyGroup>
+
+   <Target Name="MapleHookImpDobbyStaticRegisterAotNativeLibrary" BeforeTargets="ComputeIlcCompileInputs" Condition="'$(MapleHookImpDobbyStaticAotEnabled)' == 'true'">
+		<!--<Message Importance="high" Text="MapleHookImpDobbyStaticBuildDirectory:$(MapleHookImpDobbyStaticBuildDirectory) " />-->
+
+		<PropertyGroup>
+           <MapleHookImpDobbyStaticNativeLibraryDirectory>$(MapleHookImpDobbyStaticBuildDirectory)runtimes\$(MapleHookImpDobbyStaticRuntimeIdentifier)\</MapleHookImpDobbyStaticNativeLibraryDirectory>
+		</PropertyGroup>
+       <!--<Message Importance="high" Text="MapleHookImpDobbyStaticNativeLibraryDirectory:$(MapleHookImpDobbyStaticNativeLibraryDirectory) " />-->
+       <Error Condition="!Exists('$(MapleHookImpDobbyStaticNativeLibraryDirectory)')" Text="[Maple.Hook.Imp.Dobby.Static] Native asset not found for RID '$(MapleHookImpDobbyStaticRuntimeIdentifier)' at '$(MapleHookImpDobbyStaticNativeLibraryDirectory)'" />
+
+       <PropertyGroup Condition="Exists('$(MapleHookImpDobbyStaticNativeLibraryDirectory)')">
+			<MapleHookImpDobbyStaticNativeLibraryPath>$(MapleHookImpDobbyStaticNativeLibraryDirectory)$(MapleHookImpDobbyStaticNativeLibraryName)$(MapleHookImpDobbyStaticNativeLibraryExtension)</MapleHookImpDobbyStaticNativeLibraryPath>
+		</PropertyGroup>
+
+       <!--<Message Importance="high" Text="ItemGroup MapleHookImpDobbyStaticNativeLibraryPath:$(MapleHookImpDobbyStaticNativeLibraryPath) " />-->
+     <Error Condition="!Exists('$(MapleHookImpDobbyStaticNativeLibraryPath)')" Text="[Maple.Hook.Imp.Dobby.Static] Native asset not found for RID '$(MapleHookImpDobbyStaticRuntimeIdentifier)' at '$(MapleHookImpDobbyStaticNativeLibraryPath)'" />
+
+        <ItemGroup Condition="Exists('$(MapleHookImpDobbyStaticNativeLibraryPath)')">
+			<DirectPInvoke Include="$(MapleHookImpDobbyStaticNativeLibraryName)" />
+			<NativeLibrary Include="$(MapleHookImpDobbyStaticNativeLibraryPath)" />
+		</ItemGroup>
+        <Message Importance="high" Text="[Maple.Hook.Imp.Dobby.Static] Native asset registered for RID '$(MapleHookImpDobbyStaticRuntimeIdentifier)' at '$(MapleHookImpDobbyStaticNativeLibraryPath)'" />
+	</Target>
+</Project>

@@ -1,0 +1,4 @@
+<Project>
+	<Import Project="$(MSBuildThisFileDirectory)..\build\Maple.Hook.Imp.MinHook.targets.impl"
+			Condition="Exists('$(MSBuildThisFileDirectory)..\build\Maple.Hook.Imp.MinHook.targets.impl') and '$(MapleHookImpMinHookTargetsImported)' != 'true'" />
+</Project>

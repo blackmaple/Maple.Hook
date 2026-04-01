@@ -14,7 +14,7 @@
 	  <Description>dotNet Maple.Hook.Imp.Dobby.Static</Description>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
 	  <PackageTags>Dobby;hook;c#;dotnet;AOT</PackageTags>
-	  <Version>0.26.0327.01-rc</Version>
+	  <Version>0.26.0401.01-rc</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,6 +23,8 @@
 
 	<ItemGroup>
 		<None Include="build\*.targets" Pack="true" PackagePath="build\" />
+       <None Include="build\*.targets.impl" Pack="true" PackagePath="build\" />
+		<None Include="buildTransitive\*.targets" Pack="true" PackagePath="buildTransitive\" />
 		<None Include="build\runtimes\win-x64\*.lib" Pack="true" PackagePath="build\runtimes\win-x64\" />
 		<None Include="build\runtimes\win-x86\*.lib" Pack="true" PackagePath="build\runtimes\win-x86\" />
 	</ItemGroup>

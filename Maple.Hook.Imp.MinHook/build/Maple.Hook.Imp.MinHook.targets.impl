@@ -1,0 +1,36 @@
+<Project>
+	<PropertyGroup>
+		<MapleHookImpMinHookTargetsImported>true</MapleHookImpMinHookTargetsImported>
+     <MapleHookImpMinHookAotEnabled Condition="'$(PublishAot)' == 'true'">true</MapleHookImpMinHookAotEnabled>
+		<MapleHookImpMinHookRuntimeIdentifier>$(RuntimeIdentifier)</MapleHookImpMinHookRuntimeIdentifier>
+		<MapleHookImpMinHookBuildDirectory>$(MSBuildThisFileDirectory)</MapleHookImpMinHookBuildDirectory>
+		<!--<MapleHookImpMinHookBuildDirectory>C:\Users\Black\source\repos\blackmaple\Maple.Hook\Maple.Hook.Imp.MinHook\build\</MapleHookImpMinHookBuildDirectory>-->
+		<MapleHookImpMinHookNativeLibraryName>libMinHook</MapleHookImpMinHookNativeLibraryName>
+		<MapleHookImpMinHookNativeLibraryExtension>.lib</MapleHookImpMinHookNativeLibraryExtension>
+		<MapleHookImpMinHookRuntimeIdentifier Condition="'$(MapleHookImpMinHookRuntimeIdentifier)' == ''">$(NETCoreSdkRuntimeIdentifier)</MapleHookImpMinHookRuntimeIdentifier>
+	</PropertyGroup>
+
+   <Target Name="MapleHookImpMinHookRegisterAotNativeLibrary" BeforeTargets="ComputeIlcCompileInputs" Condition="'$(MapleHookImpMinHookAotEnabled)' == 'true'">
+		<!--<Message Importance="high" Text="MapleHookImpMinHookBuildDirectory:$(MapleHookImpMinHookBuildDirectory) " />-->
+
+		<PropertyGroup>
+           <MapleHookImpMinHookNativeLibraryDirectory>$(MapleHookImpMinHookBuildDirectory)runtimes\$(MapleHookImpMinHookRuntimeIdentifier)\</MapleHookImpMinHookNativeLibraryDirectory>
+		</PropertyGroup>
+       <!--<Message Importance="high" Text="MapleHookImpMinHookNativeLibraryDirectory:$(MapleHookImpMinHookNativeLibraryDirectory) " />-->
+       <Error Condition="!Exists('$(MapleHookImpMinHookNativeLibraryDirectory)')" Text="[Maple.Hook.Imp.MinHook] Native asset not found for RID '$(MapleHookImpMinHookRuntimeIdentifier)' at '$(MapleHookImpMinHookNativeLibraryDirectory)'" />
+
+       <PropertyGroup Condition="Exists('$(MapleHookImpMinHookNativeLibraryDirectory)')">
+			<MapleHookImpMinHookNativeLibraryPath>$(MapleHookImpMinHookNativeLibraryDirectory)$(MapleHookImpMinHookNativeLibraryName)$(MapleHookImpMinHookNativeLibraryExtension)</MapleHookImpMinHookNativeLibraryPath>
+		</PropertyGroup>
+
+       <!--<Message Importance="high" Text="ItemGroup MapleHookImpMinHookNativeLibraryPath:$(MapleHookImpMinHookNativeLibraryPath) " />-->
+     <Error Condition="!Exists('$(MapleHookImpMinHookNativeLibraryPath)')" Text="[Maple.Hook.Imp.MinHook] Native asset not found for RID '$(MapleHookImpMinHookRuntimeIdentifier)' at '$(MapleHookImpMinHookNativeLibraryPath)'" />
+
+        <ItemGroup Condition="Exists('$(MapleHookImpMinHookNativeLibraryPath)')">
+			<LinkerArg Include="/LTCG" />
+         <DirectPInvoke Include="$(MapleHookImpMinHookNativeLibraryName)" />
+			<NativeLibrary Include="$(MapleHookImpMinHookNativeLibraryPath)" />
+		</ItemGroup>
+        <Message Importance="high" Text="[Maple.Hook.Imp.MinHook] Native asset registered for RID '$(MapleHookImpMinHookRuntimeIdentifier)' at '$(MapleHookImpMinHookNativeLibraryPath)'" />
+	</Target>
+</Project>

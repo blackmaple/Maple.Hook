@@ -1,4 +1,8 @@
 <Project>
+    <PropertyGroup>
+		<MapleHookImpMinHookPackageBuildDirectory Condition="'$(MapleHookImpMinHookPackageBuildDirectory)' == ''">$(MSBuildThisFileDirectory)</MapleHookImpMinHookPackageBuildDirectory>
+	</PropertyGroup>
+
 	<Import Project="$(MSBuildThisFileDirectory)Maple.Hook.Imp.MinHook.targets.impl"
 			Condition="Exists('$(MSBuildThisFileDirectory)Maple.Hook.Imp.MinHook.targets.impl') and '$(MapleHookImpMinHookTargetsImported)' != 'true'" />
 </Project>

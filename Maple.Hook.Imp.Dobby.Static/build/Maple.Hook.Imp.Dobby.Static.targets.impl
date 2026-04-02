@@ -1,9 +1,10 @@
 <Project>
 	<PropertyGroup>
 		<MapleHookImpDobbyStaticTargetsImported>true</MapleHookImpDobbyStaticTargetsImported>
+      <MapleHookImpDobbyStaticPackageBuildDirectory Condition="'$(MapleHookImpDobbyStaticPackageBuildDirectory)' == ''">$(MSBuildThisFileDirectory)</MapleHookImpDobbyStaticPackageBuildDirectory>
      <MapleHookImpDobbyStaticAotEnabled Condition="'$(PublishAot)' == 'true'">true</MapleHookImpDobbyStaticAotEnabled>
 		<MapleHookImpDobbyStaticRuntimeIdentifier>$(RuntimeIdentifier)</MapleHookImpDobbyStaticRuntimeIdentifier>
-		<MapleHookImpDobbyStaticBuildDirectory>$(MSBuildThisFileDirectory)</MapleHookImpDobbyStaticBuildDirectory>
+      <MapleHookImpDobbyStaticBuildDirectory>$(MapleHookImpDobbyStaticPackageBuildDirectory)</MapleHookImpDobbyStaticBuildDirectory>
 		<!--<MapleHookImpDobbyStaticBuildDirectory>C:\Users\NBNN_IT_CODE\source\repos\Maple.Hook\Maple.Hook.Imp.Dobby.Static\build\</MapleHookImpDobbyStaticBuildDirectory>-->
 		<MapleHookImpDobbyStaticNativeLibraryName>dobby</MapleHookImpDobbyStaticNativeLibraryName>
 		<MapleHookImpDobbyStaticNativeLibraryExtension>.lib</MapleHookImpDobbyStaticNativeLibraryExtension>

@@ -1,9 +1,10 @@
 <Project>
 	<PropertyGroup>
 		<MapleHookImpMinHookTargetsImported>true</MapleHookImpMinHookTargetsImported>
+      <MapleHookImpMinHookPackageBuildDirectory Condition="'$(MapleHookImpMinHookPackageBuildDirectory)' == ''">$(MSBuildThisFileDirectory)</MapleHookImpMinHookPackageBuildDirectory>
      <MapleHookImpMinHookAotEnabled Condition="'$(PublishAot)' == 'true'">true</MapleHookImpMinHookAotEnabled>
 		<MapleHookImpMinHookRuntimeIdentifier>$(RuntimeIdentifier)</MapleHookImpMinHookRuntimeIdentifier>
-		<MapleHookImpMinHookBuildDirectory>$(MSBuildThisFileDirectory)</MapleHookImpMinHookBuildDirectory>
+      <MapleHookImpMinHookBuildDirectory>$(MapleHookImpMinHookPackageBuildDirectory)</MapleHookImpMinHookBuildDirectory>
 		<!--<MapleHookImpMinHookBuildDirectory>C:\Users\Black\source\repos\blackmaple\Maple.Hook\Maple.Hook.Imp.MinHook\build\</MapleHookImpMinHookBuildDirectory>-->
 		<MapleHookImpMinHookNativeLibraryName>libMinHook</MapleHookImpMinHookNativeLibraryName>
 		<MapleHookImpMinHookNativeLibraryExtension>.lib</MapleHookImpMinHookNativeLibraryExtension>

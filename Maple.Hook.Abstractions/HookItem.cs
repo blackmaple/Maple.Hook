@@ -69,7 +69,7 @@ namespace Maple.Hook.Abstractions
         {
             get
             {
-                var pointer = this.TargetPointer;
+                var pointer = this.DetourPointer;
                 return Unsafe.As<nint, TDetourMethod>(ref pointer);
 
             }

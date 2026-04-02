@@ -1,8 +1,9 @@
 <Project>
 	<PropertyGroup>
 		<MapleHookImpDobbyDynamicTargetsImported>true</MapleHookImpDobbyDynamicTargetsImported>
+       <MapleHookImpDobbyDynamicPackageBuildDirectory Condition="'$(MapleHookImpDobbyDynamicPackageBuildDirectory)' == ''">$(MSBuildThisFileDirectory)</MapleHookImpDobbyDynamicPackageBuildDirectory>
       <MapleHookImpDobbyDynamicRuntimeIdentifier>$(RuntimeIdentifier)</MapleHookImpDobbyDynamicRuntimeIdentifier>
-		<MapleHookImpDobbyDynamicBuildDirectory>$(MSBuildThisFileDirectory)</MapleHookImpDobbyDynamicBuildDirectory>
+        <MapleHookImpDobbyDynamicBuildDirectory>$(MapleHookImpDobbyDynamicPackageBuildDirectory)</MapleHookImpDobbyDynamicBuildDirectory>
 		<!--<MapleHookImpDobbyDynamicBuildDirectory>C:\Users\NBNN_IT_CODE\source\repos\Maple.Hook\Maple.Hook.Imp.Dobby.Dynamic\build\</MapleHookImpDobbyDynamicBuildDirectory>-->
 		<MapleHookImpDobbyDynamicNativeLibraryName>dobby</MapleHookImpDobbyDynamicNativeLibraryName>
 		<MapleHookImpDobbyDynamicNativeLibraryExtension>.dll</MapleHookImpDobbyDynamicNativeLibraryExtension>

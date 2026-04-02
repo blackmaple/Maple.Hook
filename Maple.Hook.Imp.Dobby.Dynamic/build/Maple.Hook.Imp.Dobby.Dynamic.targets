@@ -1,4 +1,8 @@
 <Project>
+  <PropertyGroup>
+		<MapleHookImpDobbyDynamicPackageBuildDirectory Condition="'$(MapleHookImpDobbyDynamicPackageBuildDirectory)' == ''">$(MSBuildThisFileDirectory)</MapleHookImpDobbyDynamicPackageBuildDirectory>
+	</PropertyGroup>
+
 	<Import Project="$(MSBuildThisFileDirectory)Maple.Hook.Imp.Dobby.Dynamic.targets.impl"
 			Condition="Exists('$(MSBuildThisFileDirectory)Maple.Hook.Imp.Dobby.Dynamic.targets.impl') and '$(MapleHookImpDobbyDynamicTargetsImported)' != 'true'" />
 </Project>

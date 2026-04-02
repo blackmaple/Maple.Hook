@@ -25,9 +25,11 @@ namespace Maple.Hook.Abstractions
 
         static bool TryAdd(string key, HookItem hookItem) => Hooks.TryAdd(key, hookItem);
         static bool TryRemove(string key) => Hooks.TryRemove(key, out _);
-        THookItem Create<THookItem>(nint pTarget, nint pDetour) where THookItem : HookItem, new()
+        public THookItem Create<THookItem>(nint pTarget, nint pDetour) where THookItem : HookItem, new()
             => Create<THookItem>(typeof(THookItem).Name, pTarget, pDetour);
         THookItem Create<THookItem>(string key, nint pTarget, nint pDetour) where THookItem : HookItem, new();
+        THookItem Create<THookItem>(string key, nint pTarget, nint pDetour, bool jmpChain) where THookItem : HookItem, new()
+            => Create<THookItem>(key, jmpChain ? HookJumpChainResolver.SkipJumpChain(pTarget) : pTarget, pDetour);
         public THookItem Create<THookItem, TTargetMethod, TDetourMethod>(string key, TTargetMethod pTarget, TDetourMethod pDetour)
             where THookItem : HookItem, new()
             where TTargetMethod : IHookMethod

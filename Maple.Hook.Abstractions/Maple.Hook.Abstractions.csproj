@@ -28,6 +28,6 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="Maple.UnmanagedExtensions" Version="0.26.327.5-rc" />
+	  <PackageReference Include="Maple.UnmanagedExtensions" Version="0.26.524.1-rc" />
 	</ItemGroup>
 </Project>
